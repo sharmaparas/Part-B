@@ -1,0 +1,36 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" style="float: right;" (click)="add(content)">
+    Add Glossary
+</button>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Glossary</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="glossaryForm" *ngIf="glossaryForm">
+            <div class="mb-3">
+                <label for="term" class="form-label">Term</label>
+                <input id="term" type="text" class="form-control" formControlName="term"
+                    [ngClass]="{'box-danger': glossaryForm.dirty && glossaryForm.controls.term.invalid}">
+                <div [ngClass]="{'text-danger': glossaryForm.dirty && glossaryForm.controls.term.invalid}"
+                    *ngIf="glossaryForm.dirty && glossaryForm.controls.term.invalid">
+                    Term is required.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="definition" class="form-label">Definition</label>
+                <textarea id="definition" class="form-control" formControlName="definition"
+                    [ngClass]="{'box-danger': glossaryForm.dirty && glossaryForm.controls.definition.invalid}">
+                </textarea>
+                <div [ngClass]="{'text-danger': glossaryForm.dirty && glossaryForm.controls.definition.invalid}"
+                    *ngIf="glossaryForm.dirty && glossaryForm.controls.definition.invalid">
+                    Definition is required.
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="save()">Save</button>
+    </div>
+</ng-template>
